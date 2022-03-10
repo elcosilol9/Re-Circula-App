@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".view.Registro">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -21,7 +21,7 @@
                 android:layout_width="250dp"
                 android:layout_height="220dp"
                 android:layout_marginVertical="16dp"
-                android:src="@drawable/login_img"
+                android:src="@drawable/registro"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/iniciar_sesion"
+                android:text="@string/registro"
                 android:textColor="@color/black"
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -111,25 +111,25 @@
                 app:layout_constraintTop_toBottomOf="@id/textInputPass" />
 
             <Button
-                android:id="@+id/btEntrar"
+                android:id="@+id/btRegistrar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/entrar"
+                android:text="@string/registrar"
                 app:layout_constraintEnd_toEndOf="@id/guidelineRight"
                 app:layout_constraintStart_toStartOf="@id/guidelineLeft"
                 app:layout_constraintTop_toBottomOf="@id/tvForgotPass" />
 
             <Button
-                android:id="@+id/btRegistro"
+                android:id="@+id/btIniciarSesion"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/registrar"
+                android:text="@string/iniciar_sesion"
                 app:layout_constraintEnd_toEndOf="@id/guidelineRight"
                 app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                app:layout_constraintTop_toBottomOf="@id/btEntrar" />
+                app:layout_constraintTop_toBottomOf="@id/btRegistrar" />
 
             <View
                 android:id="@+id/space"
@@ -139,17 +139,17 @@
                 android:background="@color/gray"
                 app:layout_constraintEnd_toEndOf="@id/guidelineRight"
                 app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                app:layout_constraintTop_toBottomOf="@id/btRegistro" />
+                app:layout_constraintTop_toBottomOf="@id/btIniciarSesion" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/guidelineRight"
                 app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                app:layout_constraintTop_toBottomOf="@id/space"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/space">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -174,7 +174,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:fontFamily="@font/roboto"
                         android:src="@drawable/google"
-                        android:text="@string/iniciar_sesi_n_con_google"
+                        android:text="@string/registro_con_google"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

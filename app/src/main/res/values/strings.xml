@@ -2,9 +2,16 @@
     <string name="app_name">Re-Circulapp</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="correo">Correo</string>
+    <string name="nombre">Nombre</string>
+    <string name="edad">Edad</string>
     <string name="password">Contraseña</string>
     <string name="entrar">Entrar</string>
     <string name="registrar">Registrar</string>
     <string name="iniciar_sesi_n_con_google">Iniciar Sesión con Google</string>
+    <string name="registro_con_google">Registrar con Google</string>
     <string name="forgot_pass">Olvidaste tu Contraseña?</string>
+    <string name="registro">Registro</string>
+    <string name="recoveryPassword">Reestablecer Contraseña</string>
+    <string name="send">Enviar</string>
+    <string name="information">Información</string>
 </resources>
