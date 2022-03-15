@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "283788184596",
+    "project_id": "re-circulapp",
+    "storage_bucket": "re-circulapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283788184596:android:d7128f5f4c258fe13dab01",
+        "android_client_info": {
+          "package_name": "com.bornidea.re_circulapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283788184596-3k0s914e4797qipp57akk62kota6c79s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bornidea.re_circulapp",
+            "certificate_hash": "8369749613ca168a39bc4da8166f7405d753babc"
+          }
+        },
+        {
+          "client_id": "283788184596-bq49tg004vh8ggdu540u3sd5s8ppe9bg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvHZhIsXbG8W8BlgRqFT2vfMYUloexwTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283788184596-bq49tg004vh8ggdu540u3sd5s8ppe9bg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
