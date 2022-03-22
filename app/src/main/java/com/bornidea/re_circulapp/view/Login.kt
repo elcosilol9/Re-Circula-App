@@ -6,11 +6,20 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bornidea.re_circulapp.R
 import com.bornidea.re_circulapp.databinding.ActivityLoginBinding
+import com.bornidea.re_circulapp.model.APIService
+import com.bornidea.re_circulapp.model.repository.LoginRepository
+import com.bornidea.re_circulapp.model.request.LoginRequest
+import com.bornidea.re_circulapp.model.utils.RetrofitInstance
+import com.bornidea.re_circulapp.model.utils.isOnline
 import com.bornidea.re_circulapp.view.utils.hideSoftKeyboard
 import com.bornidea.re_circulapp.view.utils.initSnackError
 import com.bornidea.re_circulapp.view.utils.isEmailValid
+import com.bornidea.re_circulapp.viewmodel.LoginViewModel
+import com.bornidea.re_circulapp.viewmodel.LoginViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -35,8 +44,10 @@ class Login : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val correo = account.email ?: ""
-                            UpdateStatus(correo, "completo")
+                            PreferencesLogin(correo, "completo")
                             //TODO REDIRECCIONAR AL MENU PRINCIPAL
+                            binding.constraintProgress.visibility = View.GONE
+                            initLogin(correo)
                         } else {
                             binding.constraintProgress.visibility = View.GONE
                             initSnackError(
@@ -44,6 +55,7 @@ class Login : AppCompatActivity() {
                                 applicationContext,
                                 getString(R.string.error_signin)
                             )
+                            binding.constraintProgress.visibility = View.GONE
                         }
                     }
             } catch (e: ApiException) {
@@ -53,11 +65,13 @@ class Login : AppCompatActivity() {
                     applicationContext,
                     getString(R.string.error_signin)
                 )
+                binding.constraintProgress.visibility = View.GONE
             }
         }
 
     //Firebase
     lateinit var auth: FirebaseAuth
+    private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_ReCirculapp)
@@ -67,6 +81,11 @@ class Login : AppCompatActivity() {
 
         /**Quitar ActionBar*/
         supportActionBar?.hide()
+
+        /**Inicializar ViewModel*/
+        val repository = LoginRepository()
+        val factory = LoginViewModelFactory(repository)
+        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
         /**Inicializar Firebase Auth*/
         auth = Firebase.auth
@@ -78,25 +97,31 @@ class Login : AppCompatActivity() {
         }
 
         binding.btEntrar.setOnClickListener {
-            if (verifyContent()) {
-                binding.constraintProgress.visibility = View.VISIBLE
-                /**Contenido Válido*/
-                var correo = binding.textEditMail.text.toString()
-                correo = correo.replace(" ", "")
-                var pass = binding.textEditPass.text.toString()
-                pass = pass.replace(" ", "")
-                hideSoftKeyboard(this)
-                SignIn(correo, pass)
+            if (isOnline(this)) {
+                if (verifyContent()) {
+                    binding.constraintProgress.visibility = View.VISIBLE
+                    /**Contenido Válido*/
+                    val correo = binding.textEditMail.text.toString().trim()
+                    val pass = binding.textEditPass.text.toString().trim()
+                    hideSoftKeyboard(this)
+                    SignIn(correo, pass)
+                }
+            } else {
+                initSnackError(binding.container, this, getString(R.string.error_network))
             }
         }
         binding.btGoogle.setOnClickListener {
-            binding.constraintProgress.visibility = View.VISIBLE
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-            val googleSignInClient = GoogleSignIn.getClient(this, gso)
-            responseLauncher.launch(googleSignInClient.signInIntent)
+            if (isOnline(this)) {
+                binding.constraintProgress.visibility = View.VISIBLE
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build()
+                val googleSignInClient = GoogleSignIn.getClient(this, gso)
+                responseLauncher.launch(googleSignInClient.signInIntent)
+            } else {
+                initSnackError(binding.container, this, getString(R.string.error_network))
+            }
         }
     }
 
@@ -105,9 +130,10 @@ class Login : AppCompatActivity() {
         auth.signInWithEmailAndPassword(correo, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    UpdateStatus(correo, "completo")
+                    PreferencesLogin(correo, "completo")
                     //TODO REDIRECCIONAR AL MENU PRINCIPAL
                     binding.constraintProgress.visibility = View.GONE
+                    initLogin(correo)
                 } else {
                     if (task.exception is FirebaseAuthInvalidUserException) {
                         initSnackError(
@@ -115,19 +141,44 @@ class Login : AppCompatActivity() {
                             applicationContext,
                             getString(R.string.not_register)
                         )
+                        binding.constraintProgress.visibility = View.GONE
                     } else if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         initSnackError(
                             binding.container,
                             applicationContext,
                             getString(R.string.incorrect_pass)
                         )
+                        binding.constraintProgress.visibility = View.GONE
                     }
                 }
             }
     }
 
+    /**Verificar si existe el usuario en servidor*/
+
+    private fun initLogin(correo: String) {
+        loginViewModel.requestLogin(LoginRequest(correo = correo))
+            .observe(this, Observer { response ->
+                when (response.codigo) {
+                    200 -> {
+                        /**Usuario Existe*/
+                        Snackbar.make(binding.container, "Correo correcto", Snackbar.LENGTH_SHORT)
+                            .show()
+                    }
+                    201 -> {
+                        /**Es un usuario nuevo*/
+                        initSnackError(binding.container, baseContext, getString(R.string.txt_201))
+                    }
+                    404 -> {
+                        /**Fallo al conectar con el servidor*/
+                        initSnackError(binding.container, baseContext, getString(R.string.txt_404))
+                    }
+                }
+            })
+    }
+
     /**Guardar informacion en preferencias*/
-    private fun UpdateStatus(correo: String, status: String) {
+    private fun PreferencesLogin(correo: String, status: String) {
         val preferences = getSharedPreferences("Login", MODE_PRIVATE)
         val editor = preferences.edit()
         editor.putString("correo", correo)

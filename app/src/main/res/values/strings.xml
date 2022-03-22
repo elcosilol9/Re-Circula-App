@@ -17,4 +17,7 @@
     <string name="not_register">No existe una cuenta asociado a ese correo</string>
     <string name="incorrect_pass">Contraseña incorrecta</string>
     <string name="error_signin">No pudimos iniciar sesión, inténtelo más tarde</string>
+    <string name="error_network">No hay conexión a internet</string>
+    <string name="txt_404">Error al conectar con el servidor</string>
+    <string name="txt_201">No existe una cuenta asociada con ese correo</string>
 </resources>
