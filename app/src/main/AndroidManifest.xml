@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bornidea.re_circulapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,17 +12,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReCirculapp">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
-            android:name=".view.RegistroDetalle"
+            android:name=".view.activities.MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ForgotPassword"
+            android:name=".view.activities.RegistroDetalle"
             android:exported="false" />
         <activity
-            android:name=".view.Registro"
+            android:name=".view.activities.ForgotPassword"
             android:exported="false" />
         <activity
-            android:name=".view.Login"
+            android:name=".view.activities.Registro"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.Login"
             android:exported="true"
             android:theme="@style/Splash_Theme">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.bornidea.re_circulapp.view
+package com.bornidea.re_circulapp.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

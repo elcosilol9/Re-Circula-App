@@ -10,8 +10,12 @@
         <entry key="..\:/ProgramasDeAndroid/ReCirculapp/app/src/main/res/layout/activity_registro.xml" value="0.36666666666666664" />
         <entry key="..\:/ProgramasDeAndroid/ReCirculapp/app/src/main/res/layout/activity_registro_detalle.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.27799258761935763" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_registro.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_registro_detalle.xml" value="0.3502329508463542" />
+        <entry key="app/src/main/res/layout/fragment_locations.xml" value="0.20199275362318841" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.20199275362318841" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.23802083333333332" />
       </map>
     </option>
   </component>

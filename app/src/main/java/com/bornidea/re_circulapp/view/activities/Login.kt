@@ -1,4 +1,4 @@
-package com.bornidea.re_circulapp.view
+package com.bornidea.re_circulapp.view.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bornidea.re_circulapp.R
 import com.bornidea.re_circulapp.databinding.ActivityLoginBinding
-import com.bornidea.re_circulapp.model.APIService
 import com.bornidea.re_circulapp.model.repository.LoginRepository
 import com.bornidea.re_circulapp.model.request.LoginRequest
-import com.bornidea.re_circulapp.model.utils.RetrofitInstance
 import com.bornidea.re_circulapp.model.utils.isOnline
 import com.bornidea.re_circulapp.view.utils.hideSoftKeyboard
 import com.bornidea.re_circulapp.view.utils.initSnackError
@@ -162,8 +160,8 @@ class Login : AppCompatActivity() {
                 when (response.codigo) {
                     200 -> {
                         /**Usuario Existe*/
-                        Snackbar.make(binding.container, "Correo correcto", Snackbar.LENGTH_SHORT)
-                            .show()
+                        val intent = Intent(this, MenuActivity::class.java)
+                        startActivity(intent)
                     }
                     201 -> {
                         /**Es un usuario nuevo*/
