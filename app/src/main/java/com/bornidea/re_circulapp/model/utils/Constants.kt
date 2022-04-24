@@ -5,4 +5,5 @@ object Constants {
     const val BASE_URL = "https://appboxplay.com/recirculapp/api/"
     //Service
     const val loginService = "login"
+    const val registerService = "register"
 }

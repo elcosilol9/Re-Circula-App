@@ -15,6 +15,7 @@
     <string name="send">Enviar</string>
     <string name="information">Información</string>
     <string name="not_register">No existe una cuenta asociado a ese correo</string>
+    <string name="is_register">Ya existe una cuenta asociada a ese correo</string>
     <string name="incorrect_pass">Contraseña incorrecta</string>
     <string name="error_signin">No pudimos iniciar sesión, inténtelo más tarde</string>
     <string name="error_network">No hay conexión a internet</string>
@@ -25,4 +26,48 @@
     <string name="profile">Perfil</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="estado">Estado</string>
+    <string name="genero">Género</string>
+    <string name="error_register">Error al registrar, intenténlo nuevamente</string>
+
+    <!--Estados-->
+    <string-array name="estados">
+        <item>Aguascalientes</item>
+        <item>Baja California</item>
+        <item>Baja California Sur</item>
+        <item>Campeche</item>
+        <item>Chiapas</item>
+        <item>Chihuahua</item>
+        <item>Ciudad de México</item>
+        <item>Coahuila</item>
+        <item>Colima</item>
+        <item>Durango</item>
+        <item>Guanajuato</item>
+        <item>Guerrero</item>
+        <item>Hidalgo</item>
+        <item>Jalisco</item>
+        <item>Estado de México</item>
+        <item>Michoacán</item>
+        <item>Morelos</item>
+        <item>Nayarit</item>
+        <item>Nuevo León</item>
+        <item>Oaxaca</item>
+        <item>Puebla</item>
+        <item>Querétaro</item>
+        <item>Quintana Roo</item>
+        <item>San Luis Potosí</item>
+        <item>Sinaloa</item>
+        <item>Sonora</item>
+        <item>Tabasco</item>
+        <item>Tamaulipas</item>
+        <item>Tlaxcala</item>
+        <item>Veracruz</item>
+        <item>Yucatán</item>
+        <item>Zacatecas</item>
+    </string-array>
+
+    <string-array name="generos">
+        <item>Hombre</item>
+        <item>Mujer</item>
+    </string-array>
 </resources>

@@ -190,7 +190,7 @@
             android:id="@+id/constraintProgress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#6F191828"
+            android:background="@color/progress_background"
             android:visibility="gone">
 
             <ProgressBar
