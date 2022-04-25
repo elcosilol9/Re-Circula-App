@@ -1,5 +1,6 @@
 package com.bornidea.re_circulapp.view.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,16 +11,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bornidea.re_circulapp.R
 import com.bornidea.re_circulapp.databinding.ActivityRegistroDetalleBinding
-import com.bornidea.re_circulapp.model.repository.LoginRepository
 import com.bornidea.re_circulapp.model.repository.RegisterRepository
-import com.bornidea.re_circulapp.model.request.LoginRequest
 import com.bornidea.re_circulapp.model.request.RegisterRequest
+import com.bornidea.re_circulapp.model.response.LoginResponse
+import com.bornidea.re_circulapp.model.utils.Constants
+import com.bornidea.re_circulapp.model.utils.Constants.EDAD
+import com.bornidea.re_circulapp.model.utils.Constants.ESTADO
+import com.bornidea.re_circulapp.model.utils.Constants.GENERO
+import com.bornidea.re_circulapp.model.utils.Constants.ISACTIVE
+import com.bornidea.re_circulapp.model.utils.Constants.NOMBRE
+import com.bornidea.re_circulapp.model.utils.Constants.USER
 import com.bornidea.re_circulapp.view.activities.Registro.Companion.CORREO
 import com.bornidea.re_circulapp.view.activities.Registro.Companion.PASS
 import com.bornidea.re_circulapp.view.utils.hideSoftKeyboard
 import com.bornidea.re_circulapp.view.utils.initSnackError
-import com.bornidea.re_circulapp.viewmodel.LoginViewModel
-import com.bornidea.re_circulapp.viewmodel.LoginViewModelFactory
 import com.bornidea.re_circulapp.viewmodel.RegisterViewModel
 import com.bornidea.re_circulapp.viewmodel.RegisterViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
@@ -121,11 +126,12 @@ class RegistroDetalle : AppCompatActivity() {
                 when (response.codigo) {
                     200 -> {
                         /**Usuario Registrado*/
-                        Toast.makeText(this, "Usuario existente", Toast.LENGTH_SHORT).show()
+                        saveUser(response)
+                        startActivity(Intent(this, MenuActivity::class.java))
                     }
                     201 -> {
                         /**Error al registrar usuario */
-                        Toast.makeText(this, "Usuario Nuevo", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Error en el registro", Toast.LENGTH_SHORT).show()
                     }
                     404 -> {
                         //TODO BORRAR CORREO DE GOOGLE
@@ -138,6 +144,18 @@ class RegistroDetalle : AppCompatActivity() {
                     }
                 }
             })
+    }
+
+    private fun saveUser(response: LoginResponse) {
+        val preferences = getSharedPreferences(USER, MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putString(Constants.CORREO, response.usuario.correo)
+        editor.putString(NOMBRE, response.usuario.nombre)
+        editor.putString(ESTADO, response.usuario.estado)
+        editor.putString(GENERO, response.usuario.genero)
+        editor.putString(EDAD, response.usuario.edad.toString())
+        editor.putBoolean(ISACTIVE, true)
+        editor.apply()
     }
 
     private fun getIntentForView() {

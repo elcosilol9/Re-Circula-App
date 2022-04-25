@@ -1,6 +1,7 @@
 package com.bornidea.re_circulapp.view.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,7 @@ import com.bornidea.re_circulapp.R
 import com.bornidea.re_circulapp.databinding.ActivityLoginBinding
 import com.bornidea.re_circulapp.model.repository.LoginRepository
 import com.bornidea.re_circulapp.model.request.LoginRequest
+import com.bornidea.re_circulapp.model.utils.Constants
 import com.bornidea.re_circulapp.model.utils.isOnline
 import com.bornidea.re_circulapp.view.utils.hideSoftKeyboard
 import com.bornidea.re_circulapp.view.utils.initSnackError
@@ -67,12 +69,26 @@ class Login : AppCompatActivity() {
             }
         }
 
+    private fun saveMethod(metodo: String) {
+        val preferences = getSharedPreferences(Constants.USER, MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putString(Constants.METODO, metodo)
+        editor.apply()
+    }
+
     //Firebase
     lateinit var auth: FirebaseAuth
+    private var preferences: SharedPreferences? = null
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_ReCirculapp)
+        preferences =
+            getSharedPreferences(Constants.USER, MODE_PRIVATE)
+        if (verifyActive()) {
+            startActivity(Intent(this, MenuActivity::class.java))
+        }
+
         super.onCreate(savedInstanceState)
         /**DataBinding*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
@@ -97,6 +113,7 @@ class Login : AppCompatActivity() {
         binding.btEntrar.setOnClickListener {
             if (isOnline(this)) {
                 if (verifyContent()) {
+                    saveMethod(Registro.METODO_EMAIL)
                     binding.constraintProgress.visibility = View.VISIBLE
                     /**Contenido Válido*/
                     val correo = binding.textEditMail.text.toString().trim()
@@ -110,6 +127,7 @@ class Login : AppCompatActivity() {
         }
         binding.btGoogle.setOnClickListener {
             if (isOnline(this)) {
+                saveMethod(Registro.METODO_GOOGLE)
                 binding.constraintProgress.visibility = View.VISIBLE
                 val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
@@ -122,6 +140,9 @@ class Login : AppCompatActivity() {
             }
         }
     }
+
+    private fun verifyActive(): Boolean =
+        preferences?.getBoolean(Constants.ISACTIVE, false) ?: false
 
     /**Login con correo y contraseña*/
     private fun SignIn(correo: String, pass: String) {
@@ -159,6 +180,9 @@ class Login : AppCompatActivity() {
             .observe(this, Observer { response ->
                 when (response.codigo) {
                     200 -> {
+                        val editor = preferences?.edit()
+                        editor?.putBoolean(Constants.ISACTIVE, true)
+                        editor?.apply()
                         /**Usuario Existe*/
                         val intent = Intent(this, MenuActivity::class.java)
                         startActivity(intent)

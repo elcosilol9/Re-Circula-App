@@ -12,6 +12,8 @@ import com.bornidea.re_circulapp.R
 import com.bornidea.re_circulapp.databinding.ActivityRegistroBinding
 import com.bornidea.re_circulapp.model.repository.LoginRepository
 import com.bornidea.re_circulapp.model.request.LoginRequest
+import com.bornidea.re_circulapp.model.utils.Constants.METODO
+import com.bornidea.re_circulapp.model.utils.Constants.USER
 import com.bornidea.re_circulapp.view.utils.hideSoftKeyboard
 import com.bornidea.re_circulapp.view.utils.initSnackError
 import com.bornidea.re_circulapp.view.utils.isEmailValid
@@ -28,6 +30,8 @@ class Registro : AppCompatActivity() {
     companion object {
         const val CORREO = "CORREO"
         const val PASS = "PASS"
+        const val METODO_EMAIL = "METODO_EMAIL"
+        const val METODO_GOOGLE = "METODO_GOOGLE"
     }
 
     lateinit var auth: FirebaseAuth
@@ -58,7 +62,6 @@ class Registro : AppCompatActivity() {
             startActivity(Intent(this, ForgotPassword::class.java))
         }
         binding.btRegistrar.setOnClickListener {
-            //startActivity(Intent(this, RegistroDetalle::class.java))
             if (verifyContent()) {
                 binding.constraintProgress.visibility = View.VISIBLE
                 /**Contenido Válido*/
@@ -66,8 +69,6 @@ class Registro : AppCompatActivity() {
                 val pass = binding.textEditPass.text.toString().trim()
                 hideSoftKeyboard(this)
                 SignIn(correo, pass)
-
-                //Register(correo, pass)
             }
         }
     }
@@ -84,6 +85,7 @@ class Registro : AppCompatActivity() {
                     binding.constraintProgress.visibility = View.GONE
                 } else {
                     if (task.exception is FirebaseAuthInvalidUserException) {
+                        saveMethod(METODO_EMAIL)
                         binding.constraintProgress.visibility = View.GONE
                         val intent = Intent(this, RegistroDetalle::class.java)
                         intent.putExtra(CORREO, binding.textEditMail.text.toString().trim())
@@ -99,6 +101,13 @@ class Registro : AppCompatActivity() {
                     }
                 }
             }
+    }
+
+    private fun saveMethod(metodoEmail: String) {
+        val preferences = getSharedPreferences(USER, MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putString(METODO, metodoEmail)
+        editor.apply()
     }
 
     private fun verifyContent(): Boolean {
