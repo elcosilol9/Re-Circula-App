@@ -44,7 +44,7 @@ class Login : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val correo = account.email ?: ""
-                            PreferencesLogin(correo, "completo")
+                            PreferencesLogin(correo)
                             //TODO REDIRECCIONAR AL MENU PRINCIPAL
                             binding.constraintProgress.visibility = View.GONE
                             initLogin(correo)
@@ -149,7 +149,7 @@ class Login : AppCompatActivity() {
         auth.signInWithEmailAndPassword(correo, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    PreferencesLogin(correo, "completo")
+                    PreferencesLogin(correo)
                     //TODO REDIRECCIONAR AL MENU PRINCIPAL
                     binding.constraintProgress.visibility = View.GONE
                     initLogin(correo)
@@ -200,11 +200,10 @@ class Login : AppCompatActivity() {
     }
 
     /**Guardar informacion en preferencias*/
-    private fun PreferencesLogin(correo: String, status: String) {
+    private fun PreferencesLogin(correo: String) {
         val preferences = getSharedPreferences("Login", MODE_PRIVATE)
         val editor = preferences.edit()
         editor.putString("correo", correo)
-        editor.putString("status", status)
         editor.apply()
     }
 

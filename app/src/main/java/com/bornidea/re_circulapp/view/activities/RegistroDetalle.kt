@@ -81,7 +81,11 @@ class RegistroDetalle : AppCompatActivity() {
                 //TODO REVISAR VERIFICACION CONEXION A INTERNET
                 if (VerifyContent()) {
                     progress.visibility = View.VISIBLE
-                    RegistrarUsuario(correo ?: "", pass ?: "")
+                    if (pass == "Recirculapp12") {
+                        Register(correo ?: "")
+                    } else {
+                        RegistrarUsuario(correo ?: "", pass ?: "Recirculapp12")
+                    }
                 }
             }
         }
