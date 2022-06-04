@@ -131,6 +131,10 @@ class Login : AppCompatActivity() {
                 binding.constraintProgress.visibility = View.VISIBLE
                 val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
+                    //Apk
+                    //.requestIdToken("283788184596-bq49tg004vh8ggdu540u3sd5s8ppe9bg.apps.googleusercontent.com")
+                    //Debug
+                    //.requestIdToken("283788184596-3k0s914e4797qipp57akk62kota6c79s.apps.googleusercontent.com")
                     .requestEmail()
                     .build()
                 val googleSignInClient = GoogleSignIn.getClient(this, gso)
@@ -220,7 +224,7 @@ class Login : AppCompatActivity() {
             initSnackError(binding.container, this, "Ingrese una contraseña")
             false
         } else {
-            if (isEmailValid(binding.textEditMail.text.toString())) {
+            if (isEmailValid(binding.textEditMail.text.toString().trim())) {
                 /**Contraseña y correo completos*/
                 true
             } else {

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.bornidea.re_circulapp.R
 import com.bornidea.re_circulapp.databinding.FragmentProfileBinding
 import com.bornidea.re_circulapp.model.utils.Constants.METODO
+import com.bornidea.re_circulapp.model.utils.Constants.NOMBRE
 import com.bornidea.re_circulapp.model.utils.Constants.USER
 import com.bornidea.re_circulapp.view.activities.Login
 import com.bornidea.re_circulapp.view.activities.Registro.Companion.METODO_EMAIL
@@ -26,6 +27,8 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
+
+        getProfileInfo()
 
         /**Cerrar sesión*/
         binding.btLogout.setOnClickListener {
@@ -64,5 +67,11 @@ class ProfileFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun getProfileInfo() {
+        val preferences =
+            requireActivity().getSharedPreferences(USER, AppCompatActivity.MODE_PRIVATE)
+        binding.tvName.text = preferences.getString(NOMBRE, "")
     }
 }

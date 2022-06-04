@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "283788184596-r70ghpt5jnt0ofm9t0rjm1g53vamla3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bornidea.re_circulapp",
+            "certificate_hash": "812ada41f0aed8a13dea85f8bc50a0ac799a2759"
+          }
+        },
+        {
           "client_id": "283788184596-bq49tg004vh8ggdu540u3sd5s8ppe9bg.apps.googleusercontent.com",
           "client_type": 3
         }

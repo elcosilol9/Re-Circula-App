@@ -15,8 +15,11 @@
         <entry key="app/src/main/res/layout/activity_registro.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_registro_detalle.xml" value="0.20288035074869795" />
         <entry key="app/src/main/res/layout/drop_down_item.xml" value="0.2105978260869565" />
-        <entry key="app/src/main/res/layout/fragment_locations.xml" value="0.20199275362318841" />
+        <entry key="app/src/main/res/layout/ficha_tecnica_dialog_fragment.xml" value="0.25997993790260254" />
+        <entry key="app/src/main/res/layout/fragment_location_dialog.xml" value="0.20223959217900817" />
+        <entry key="app/src/main/res/layout/fragment_locations.xml" value="0.24141993868178213" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.21443786621093747" />
+        <entry key="app/src/main/res/layout/fragment_settings_location_dialog.xml" value="0.228125" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.23802083333333332" />
       </map>
     </option>

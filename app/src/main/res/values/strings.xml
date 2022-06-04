@@ -32,6 +32,9 @@
     <string name="estado">Estado</string>
     <string name="genero">Género</string>
     <string name="error_register">Error al registrar, intenténlo nuevamente</string>
+    <string name="municipio">Municipio / Localidad</string>
+    <string name="producto">Producto</string>
+    <string name="servicio">Servicio</string>
 
     <!--Estados-->
     <string-array name="estados">
@@ -72,5 +75,50 @@
     <string-array name="generos">
         <item>Hombre</item>
         <item>Mujer</item>
+    </string-array>
+
+    <string-array name="productos">
+        <item>Calzado y articulos de piel y cuero</item>
+        <item>Motocicletas</item>
+        <item>Aparatos eléctricos para el hogar y personales</item>
+        <item>Equipo eléctronico y de presión</item>
+        <item>Artículos para el hogar y personales</item>
+        <item>Automóviles y camiones</item>
+        <item>Llantas</item>
+        <item>Bicicletas</item>
+        <item>Maquinaria, equipo comercial y de servicios</item>
+        <item>Maquinaria para mover y levantar materiales</item>
+        <item>Maquinaria y equipo agropecuario y forestal</item>
+    </string-array>
+
+    <string-array name="servicios">
+        <item>Reparación</item>
+        <item>Mantenimiento</item>
+        <item>Hojalatería y pintura</item>
+        <item>Lavado y lubricado</item>
+        <item>Tapicería</item>
+        <item>Instalación de cristales y carrocerías</item>
+        <item>Alineación y balanceo</item>
+        <item>Auto partes</item>
+        <item>Servicio de blindaje y adaptación</item>
+    </string-array>
+
+    <string-array name="municipios">
+        <item>Álvaro Obregón</item>
+        <item>Azcapotzalco</item>
+        <item>Benito Juárez</item>
+        <item>Coyoacán</item>
+        <item>Cuajimalpa</item>
+        <item>Cuauhtémoc</item>
+        <item>Gustavo A. Madero</item>
+        <item>Iztacalco</item>
+        <item>Iztapalapa</item>
+        <item>Magdalena Contreras</item>
+        <item>Miguel Hidalgo</item>
+        <item>Milpa Alta</item>
+        <item>Tláhuac</item>
+        <item>Tlalpan</item>
+        <item>Venustiano Carranza</item>
+        <item>Xochimilco</item>
     </string-array>
 </resources>
