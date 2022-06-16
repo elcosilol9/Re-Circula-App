@@ -8,6 +8,8 @@ object Constants {
     const val loginService = "login"
     const val registerService = "register"
     const val negociosService = "negocios"
+    const val editprofile = "editar"
+    const val updateProfile = "actualizar"
 
     //SharedPreferences
     const val METODO = "metodo"

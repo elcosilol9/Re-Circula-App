@@ -1,10 +1,10 @@
 package com.bornidea.re_circulapp.model
 
-import com.bornidea.re_circulapp.model.request.LoginRequest
-import com.bornidea.re_circulapp.model.request.NegociosRequest
-import com.bornidea.re_circulapp.model.request.RegisterRequest
+import com.bornidea.re_circulapp.model.request.*
+import com.bornidea.re_circulapp.model.response.EditProfileResponse
 import com.bornidea.re_circulapp.model.response.LoginResponse
 import com.bornidea.re_circulapp.model.response.NegociosResponse
+import com.bornidea.re_circulapp.model.response.UpdateUserResponse
 import com.bornidea.re_circulapp.model.utils.Constants
 import retrofit2.Response
 import retrofit2.http.Body
@@ -22,4 +22,12 @@ interface APIService {
     //Negocios
     @POST(Constants.negociosService)
     suspend fun getNegocios(@Body negociosRequest: NegociosRequest): Response<NegociosResponse>
+
+    //EditarPerfil
+    @POST(Constants.editprofile)
+    suspend fun getInfoUser(@Body editProfileRequest: EditProfileRequest): Response<EditProfileResponse>
+
+    //ActualizarPerfil
+    @POST(Constants.updateProfile)
+    suspend fun updateInfoUser(@Body updateUserRequest: UpdateUserRequest): Response<UpdateUserResponse>
 }

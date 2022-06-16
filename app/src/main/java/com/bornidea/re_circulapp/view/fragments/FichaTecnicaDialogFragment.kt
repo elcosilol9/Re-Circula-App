@@ -14,6 +14,7 @@ import com.bornidea.re_circulapp.R
 import com.bornidea.re_circulapp.databinding.FichaTecnicaDialogFragmentBinding
 import com.bornidea.re_circulapp.model.response.Negocios
 import com.google.gson.Gson
+import java.util.*
 
 
 class FichaTecnicaDialogFragment : DialogFragment() {
@@ -66,6 +67,11 @@ class FichaTecnicaDialogFragment : DialogFragment() {
                 intent.data = Uri.parse("mailto:") // only email apps should handle this
                 intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(negocio.email))
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Contacto desde Re-CirculApp")
+                startActivity(intent)
+            }
+            btLocation.setOnClickListener {
+                val uri = "http://maps.google.com/maps?q=loc:${negocio.latitud},${negocio.longitud}"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
                 startActivity(intent)
             }
         }

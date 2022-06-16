@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Nombre (s)"
+                tools:text="Nombre (s)"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
