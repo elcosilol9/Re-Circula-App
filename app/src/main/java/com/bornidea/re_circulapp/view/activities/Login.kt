@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -59,6 +60,7 @@ class Login : AppCompatActivity() {
                         }
                     }
             } catch (e: ApiException) {
+                Log.e("Error",e.message!!)
                 binding.constraintProgress.visibility = View.GONE
                 initSnackError(
                     binding.container,
@@ -131,10 +133,6 @@ class Login : AppCompatActivity() {
                 binding.constraintProgress.visibility = View.VISIBLE
                 val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
-                    //Apk
-                    //.requestIdToken("283788184596-bq49tg004vh8ggdu540u3sd5s8ppe9bg.apps.googleusercontent.com")
-                    //Debug
-                    //.requestIdToken("283788184596-3k0s914e4797qipp57akk62kota6c79s.apps.googleusercontent.com")
                     .requestEmail()
                     .build()
                 val googleSignInClient = GoogleSignIn.getClient(this, gso)
@@ -154,7 +152,6 @@ class Login : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     PreferencesLogin(correo)
-                    //TODO REDIRECCIONAR AL MENU PRINCIPAL
                     binding.constraintProgress.visibility = View.GONE
                     initLogin(correo)
                 } else {

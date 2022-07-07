@@ -85,7 +85,7 @@ class ProfileFragment : Fragment() {
             sendIntent.action = Intent.ACTION_SEND
             sendIntent.putExtra(
                 Intent.EXTRA_TEXT,
-                "Descarga recirculapp: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+                "Descarga rEColapp: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
             )
             sendIntent.type = "text/plain"
             startActivity(sendIntent)

@@ -120,10 +120,6 @@ class Registro : AppCompatActivity() {
                 binding.constraintProgress.visibility = View.VISIBLE
                 val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
-                    //Apk
-                    //.requestIdToken("283788184596-r70ghpt5jnt0ofm9t0rjm1g53vamla3t.apps.googleusercontent.com")
-                    //Debug
-                    //.requestIdToken("283788184596-3k0s914e4797qipp57akk62kota6c79s.apps.googleusercontent.com")
                     .requestEmail()
                     .build()
                 val googleSignInClient = GoogleSignIn.getClient(this, gso)
